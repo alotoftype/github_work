@@ -32,4 +32,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         run: |
-          git push "https://${{ env.PERSONAL_TOKEN }}@github.com/<YOUR_USERNAME>/<YOUR_REPO>.git" HEAD:main
+          git push "https://${{ env.PERSONAL_TOKEN }}@github.com/alotoftype/github_work.git" HEAD:main

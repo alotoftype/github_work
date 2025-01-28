@@ -1,0 +1,33 @@
+name: Scheduled Commits
+
+on:
+  schedule:
+    - cron: "0 0,8,16 * * *"
+
+jobs:
+  commit-jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Make changes
+        run: |
+          # Example Add a timestamp to a log file
+          echo "Automated commit at $(date)" >> daily-commit-log.txt
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "Serge M"
+          git config --global user.email "3777549+alotoftype@users.noreply.github.com"
+
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "Automated commit at $(date)"
+
+      - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        run: |
+          git push "https://${{ env.PERSONAL_TOKEN }}@github.com/<YOUR_USERNAME>/<YOUR_REPO>.git" HEAD:main
